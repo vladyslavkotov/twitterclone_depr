@@ -4,8 +4,6 @@ from django.utils.translation import gettext as _
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.validators import EmailValidator,URLValidator
 
-# Create your models here.
-
 class User(AbstractUser):
 
     username_validator = UnicodeUsernameValidator()
@@ -32,7 +30,9 @@ class User(AbstractUser):
     userpic = models.ImageField(default='default.jpg', upload_to='userpics')
     background = models.ImageField(default='default.jpg', upload_to='backgrounds')
     is_verified = models.BooleanField(default=False)
-    joined = models.DateTimeField(auto_now_add=True)  # first created
-    bio = models.TextField(blank=True)
+    bio = models.TextField(max_length=160,blank=True)
     followers = models.IntegerField(default=0)
     following = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.username}'
