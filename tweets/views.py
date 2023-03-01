@@ -11,6 +11,14 @@ class TweetListView(ListView):
     context_object_name = "tweets"
     model=Tweet
 
+    # #tweets by only currently logged in user
+    # def get_queryset(self):
+    #     return Tweet.objects.filter(author=self.request.user)
+
+    def get_queryset(self):
+        mother_tweet=Tweet.objects.get(pk=1)
+        return Tweet.objects.filter(replied_to=mother_tweet)
+
 class UserTweetListView(ListView):
 
     model=Tweet

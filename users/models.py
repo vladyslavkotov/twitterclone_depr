@@ -32,6 +32,7 @@ class User(AbstractUser):
     is_verified = models.BooleanField(default=False)
     bio = models.TextField(max_length=160,blank=True)
 
+    #most likely m2m relationship
     followers=models.ForeignKey('self',on_delete=models.SET_NULL,null=True,related_name='+')
     following = models.ForeignKey('self', on_delete=models.SET_NULL,null=True,related_name='+')
 
