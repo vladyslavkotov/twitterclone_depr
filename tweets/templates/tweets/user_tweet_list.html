@@ -1,0 +1,9 @@
+
+<h2>Tweets</h2>
+{% for tweet in tweets %}
+        <div>
+            <div>{{ tweet.text}} by {{ tweet.author }} </div>
+            <div>{{ tweet.when}}</div>
+            <br>
+        </div>
+    {% endfor %}

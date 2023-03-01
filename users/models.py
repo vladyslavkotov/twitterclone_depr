@@ -5,6 +5,7 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.validators import EmailValidator,URLValidator
 
 class User(AbstractUser):
+    #add phone
 
     username_validator = UnicodeUsernameValidator()
     email_validator = EmailValidator()
@@ -25,14 +26,14 @@ class User(AbstractUser):
         )
 
     name = models.CharField(max_length=50)
-    link = models.CharField(max_length=50,blank=True,
-        validators=[url_validator])
+    link = models.CharField(max_length=50,blank=True, validators=[url_validator])
     userpic = models.ImageField(default='default.jpg', upload_to='userpics')
     background = models.ImageField(default='default.jpg', upload_to='backgrounds')
     is_verified = models.BooleanField(default=False)
     bio = models.TextField(max_length=160,blank=True)
-    followers = models.IntegerField(default=0)
-    following = models.IntegerField(default=0)
+
+    followers=models.ForeignKey('self',on_delete=models.SET_NULL,null=True,related_name='+')
+    following = models.ForeignKey('self', on_delete=models.SET_NULL,null=True,related_name='+')
 
     def __str__(self):
         return f'{self.username}'

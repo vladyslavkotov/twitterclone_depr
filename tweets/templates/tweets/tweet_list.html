@@ -1,0 +1,12 @@
+{% block content %}
+    <h2>Tweets</h2>
+    <h5>current user: {{user.username}}</h5>
+    {% for tweet in tweets %}
+        <div>
+            <div><a href="{% url 'detail' tweet.author tweet.pk %}">{{ tweet.text}}</a> by <a href="{% url 'userfeed' tweet.author %}">{{ tweet.author }}</a> </div>
+            <div>{{ tweet.when}}</div>
+            <br>
+        </div>
+    {% endfor %}
+<a href="{% url 'logout' %}">Log out</a>
+{% endblock %}
