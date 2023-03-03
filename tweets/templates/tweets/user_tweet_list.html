@@ -1,10 +1,8 @@
 
 <h2>Tweets</h2>
-<h4>{{user}}</h4>
 {% for tweet in tweets %}
         <div>
-            <div>{{ tweet.text}} by {{ tweet.author }} </div>
-            <div>{{ tweet.when}}</div>
+            <div>{{ tweet.text}} by {{ tweet.author }} at {{tweet.date_posted}}</div>
             <br>
         </div>
     {% endfor %}

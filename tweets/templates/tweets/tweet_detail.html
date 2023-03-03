@@ -1,19 +1,15 @@
 {% block content %}
-    <h2>Tweet contents</h2>
-        <div>
-            <div>{{ tweet.author}}</div>
-            <div>{{ tweet.text}}</div>
-            <div>{{ tweet.when}}</div>
-            <br>
-        </div>
-    <h3>Replies</h3>
-    {%for reply in tweet.replies.all %}
-        <div>
-            <div>{{ reply.author}}</div>
-            <div>{{ reply.text}}</div>
-            <div>{{ reply.when}}</div>
-            <br>
-        </div>
-    {%endfor%}
+<h2>Tweet contents</h2>
+<div>
+    <div>{{ tweet.text}} by {{ tweet.author }} at {{tweet.date_posted}}</div>
+    <br>
+</div>
+<h3>Replies</h3>
+{%for reply in tweet.replies.all %}
+<div>
+    <div>{{ reply.text}} by {{ reply.author }} replied to {{reply.replied_to.text}} by {{reply.replied_to.author}} at at {{reply.date_posted}}</div>
+    <br>
+</div>
+{%endfor%}
 
 {% endblock %}
