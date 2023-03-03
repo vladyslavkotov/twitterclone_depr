@@ -6,10 +6,11 @@
 </div>
 <h3>Replies</h3>
 {%for reply in tweet.replies.all %}
-<div>
-    <div>{{ reply.text}} by {{ reply.author }} replied to {{reply.replied_to.text}} by {{reply.replied_to.author}} at at {{reply.date_posted}}</div>
+    <div><a href="{% url 'detail' reply.author reply.pk %}"> {{ reply.text}} </a>
+        by <a href="{% url 'userfeed' reply.author %}"> {{ reply.author }} </a> at {{reply.date_posted}}</div>
     <br>
-</div>
 {%endfor%}
+
+<a href="{% url 'create' %}">Reply</a>
 
 {% endblock %}

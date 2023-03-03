@@ -16,8 +16,7 @@ class TweetListView(ListView):
     #     return Tweet.objects.filter(author=self.request.user)
 
     def get_queryset(self):
-        mother_tweet=Tweet.objects.get(pk=1)
-        return Tweet.objects.filter(replied_to=None)
+        return Tweet.objects.filter(replied_to__isnull=True)
 
 class UserTweetListView(ListView):
 
@@ -29,14 +28,17 @@ class UserTweetListView(ListView):
         user = get_object_or_404(User, username=self.kwargs['author'])
         return Tweet.objects.filter(author=user)
 
+
 class TweetDetailView(DetailView):
     model=Tweet
     context_object_name = "tweet"
+
 
 class TweetCreateView(LoginRequiredMixin,CreateView):
     model=Tweet
     context_object_name = "tweet"
     fields=["text","pic1"]
+
 
     def get_success_url(self):
         return reverse('feed')

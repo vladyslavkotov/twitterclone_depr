@@ -19,8 +19,8 @@ class Tweet(models.Model):
         return f"{self.pk} {self.text} by {self.author} at {self.date_posted}"
 
     def save(self, *args, **kwargs):
-        # DONT call save on self.replied_to
+        '''DONT call save on self.replied_to'''
         super().save(*args,**kwargs)
-        # print(self.replied_to, type(self.replied_to))
-        self.replied_to.replies.add(self)
+        if self.replied_to:
+            self.replied_to.replies.add(self)
 
