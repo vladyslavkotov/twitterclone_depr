@@ -39,7 +39,6 @@ class TweetDetailView(DetailView):
     model=Tweet
     context_object_name = "tweet"
 
-
 class TweetCreateView(LoginRequiredMixin,CreateView):
     model=Tweet
     context_object_name = "tweet"
