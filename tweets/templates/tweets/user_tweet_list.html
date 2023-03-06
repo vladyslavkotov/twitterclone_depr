@@ -1,8 +1,10 @@
 
 <h2>Tweets</h2>
 {% for tweet in tweets %}
-        <div>
-            <div>{{ tweet.text}} by {{ tweet.author }} at {{tweet.date_posted}}</div>
-            <br>
-        </div>
-    {% endfor %}
+        <div><a href="{% url 'detail' tweet.author tweet.pk %}">{{ tweet.text}}</a> by <a href="{% url 'userfeed' tweet.author %}">{{ tweet.author }}</a> at {{ tweet.date_posted}} </div>
+        <br>
+{% endfor %}
+
+<p>current user {{request.user.pk}} {{request.user}} </p>
+<p>current user {{ tweets.0.author }}</p>
+

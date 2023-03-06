@@ -17,18 +17,19 @@ from django.contrib import admin
 from django.urls import path, include
 from tweets.views import TweetListView,TweetDetailView,TweetCreateView,UserTweetListView
 
-from users.views import UserCreateView,UserDetailView
+from users.views import UserCreateView,UserDetailView,follow
 from django.contrib.auth.views import LoginView, LogoutView
 from users.forms import CustomAuthenticationForm
 
 urlpatterns = [ #rewrite using include for tweets and users
-    path('admin1/', admin.site.urls),
+    path('admin/', admin.site.urls),
     # path('',include('tweets.urls')),
     path('feed/', TweetListView.as_view(), name='feed'),
     path('<author>/tweets', UserTweetListView.as_view(), name='userfeed'),
     path('<author>/<int:pk>/', TweetDetailView.as_view(),name='detail'),
     path('register/', UserCreateView.as_view(),name='register'),
-    path('create/', TweetCreateView.as_view(),name='create'),
+    path('<int:pk>/reply/', TweetCreateView.as_view(),name='create'),
+    path('follow/',follow, name='follow'),
     # path('profile/', UserDetailView.as_view(),name='profile'),
     path('login/', LoginView.as_view(template_name="users/login.html",authentication_form=CustomAuthenticationForm),name='login'),
     path('logout/', LogoutView.as_view(),name='logout'),

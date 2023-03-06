@@ -6,7 +6,6 @@ from django.utils.translation import gettext_lazy as _
 
 class TweetAdmin(admin.ModelAdmin):
     list_display = ["pk","text","author","date_posted"]
-    readonly_fields = ["likes","retweets","views"]
     # fields=["text","author","pic1"]
 
 admin.site.register(Tweet,TweetAdmin)

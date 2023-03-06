@@ -4,6 +4,8 @@ from django.utils.translation import gettext as _
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.validators import EmailValidator,URLValidator
 
+
+
 class User(AbstractUser):
     #add phone
 
@@ -32,9 +34,8 @@ class User(AbstractUser):
     is_verified = models.BooleanField(default=False)
     bio = models.TextField(max_length=160,blank=True)
 
-    #most likely m2m relationship
-    followers=models.ForeignKey('self',on_delete=models.SET_NULL,null=True,related_name='+')
-    following = models.ForeignKey('self', on_delete=models.SET_NULL,null=True,related_name='+')
+    followers=models.ManyToManyField('self',symmetrical=False, related_name='user_followers')
+    following = models.ManyToManyField('self',symmetrical=False, related_name='user_following')
 
     def __str__(self):
         return f'{self.username}'
