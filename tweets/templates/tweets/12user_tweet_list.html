@@ -3,27 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <style>
-    .material-icons {
-      font-family: 'Material Icons';
-      font-weight: normal;
-      font-style: normal;
-      font-size: 24px;
-      display: inline-block;
-      line-height: 1;
-      text-transform: none;
-      letter-spacing: normal;
-      word-wrap: normal;
-      white-space: nowrap;
-      direction: ltr;
-      }
-
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 48
+    }
       button {
         border: none;
         padding: 0;
         background: none;
-        color:blue;
         cursor:pointer;
       }
   </style>
@@ -47,7 +39,7 @@
   <form style="display:inline" action="{% url 'like' tweet.pk %}" method="post">
     {% csrf_token %}
     <button class="unstyled-button" type="submit" name="tweet_pk" value="{{ tweet.pk }}">
-      <span class="material-icons">favorite</span>
+      <span class="material-symbols-outlined">favorite</span>
     </button>
     <span>{{tweet.likes.count}}</span>
   </form>

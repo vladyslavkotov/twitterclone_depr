@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from users.views import *
+from django.conf.urls.static import static
+from django.contrib.auth.views import *
 from tweets.views import TweetListView,TweetDetailView,TweetCreateView,UserTweetListView
 
-from users.views import UserCreateView,UserDetailView,follow, UserLoginView, UserLogoutView
-from django.contrib.auth.views import LoginView, LogoutView
+from users.views import UserCreateView,follow, UserLoginView, UserLogoutView
 
 urlpatterns = [ #rewrite using include for tweets and users
     path('admin/', admin.site.urls),
@@ -29,11 +31,22 @@ urlpatterns = [ #rewrite using include for tweets and users
     path('<author>/<int:pk>/', TweetDetailView.as_view(),name='detail'),
     path('register/', UserCreateView.as_view(),name='register'),
     path('<int:pk>/reply/', TweetCreateView.as_view(),name='create'),
-    path('follow/',follow, name='follow'),
+    path('<int:pk>/like/',like, name='like'),
+    path('<int:pk>/follow/',follow, name='follow'),
+    path('<int:pk>/retweet/', retweet, name='retweet'),
     # path('profile/', UserDetailView.as_view(),name='profile'),
-    path('login/', UserLoginView.as_view(template_name="users/login.html"),name='login'),
-    path('logout/', UserLogoutView.as_view(template_name="users/logout.html"),name='logout'),
+    path('login/', UserLoginView.as_view(),name='login'),
+    path('logout/', UserLogoutView.as_view(),name='logout'),
+    path("password_change/", PasswordChangeView.as_view(), name="password_change"),
+    path("password_change/done/",PasswordChangeDoneView.as_view(),name="password_change_done"),
+    path("password_reset/", PasswordResetView.as_view(), name="password_reset"),
+    path("password_reset/done/", PasswordResetDoneView.as_view(),name="password_reset_done"),
+    path("reset/<uidb64>/<token>/", PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
+    path("reset/done/",PasswordResetCompleteView.as_view(template_name='users/password_reset_done.html'),name="password_reset_complete"),
 ]
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 '''
 use standard URLs where possible

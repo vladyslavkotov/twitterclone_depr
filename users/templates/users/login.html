@@ -27,6 +27,25 @@
 <input type="submit" value="login">
 <input type="hidden" name="next" value="{{ next }}">
 </form>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <div id="g_id_onload"
+     data-client_id="YOUR_GOOGLE_CLIENT_ID"
+     data-login_uri="/login/"
+     data-auto_prompt="true">
+  </div>
+  <div class="g_id_signin"
+     data-type="icon"
+     data-size="large"
+     data-theme="outline"
+     data-text="sign_in_with"
+     data-shape="rectangular"
+     data-logo_alignment="left">
+  </div>
+
+<p>forgot your password? <a href="{%url 'password_reset' %}">reset your password</a></p>
+
+
 {% endblock %}
 </body>
 </html>

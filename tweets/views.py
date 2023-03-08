@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView,DetailView,CreateView
+from django.views.generic.detail import SingleObjectMixin
 from users.models import User
 from django.urls import reverse
 
@@ -30,9 +31,11 @@ class UserTweetListView(ListView):
     template_name = "tweets/user_tweet_list.html"
 
     #works
+
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs['author'])
         return Tweet.objects.filter(author=user)
+
 
 class TweetDetailView(DetailView):
     #single tweet, replies and Reply form
